@@ -1,10 +1,14 @@
 import Image from "next/image";
 import NavBar from "./components/NavBar";
+import Body from './components/Body'
+import Footer from './components/Footer'
 
 export default function Home() {
   return (
-<div className="bg-amber-100 ">
+<div>
 <NavBar/>
+<Body/>
+<Footer/>
 </div>
   );
 }

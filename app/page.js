@@ -1,9 +1,9 @@
-import Body from './components/Body'
+import Feed from './components/Feed'
 
 export default function Home() {
   return (
 <div className="h-full">
-<Body/>
+<Feed/>
 </div>
   );
 }

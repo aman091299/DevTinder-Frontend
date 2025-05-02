@@ -1,8 +1,7 @@
 
-import {NextRequest} from 'next/server';
 import { NextResponse } from 'next/server'
 
-const protectedRoutes=['/','/profile'];
+const protectedRoutes=['/','/profile','/connections','/request'];
 
 export const middleware=async (req)=>{
     const path = req.nextUrl.pathname;
@@ -12,11 +11,11 @@ export const middleware=async (req)=>{
     if(protectedRoutes.includes(path) && ! token ){
         return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
-
+    
     return NextResponse.next();
 
 }
 
 export const config={
-    matcher:["/login",'/', '/feed','/profile']
+    matcher:["/login",'/', '/feed','/profile','/connections','/request']
 }

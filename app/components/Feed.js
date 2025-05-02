@@ -5,21 +5,23 @@ import { BASE_URL } from '../utils/constant';
 import { addFeed } from '../utils/store/userFeedSlice';
 import {useRouter} from 'next/navigation';
 import axios from 'axios';
-const Body = () => {
-
-  const user=useSelector(store=>store.user)
+import Loader from './Loader';
+import Card from './Card'
+const Feed = () => {
   const userFeed=useSelector(store=>store.feed);
   const dispatch=useDispatch();
   const router=useRouter();
   const [loading,setLoading]=useState(false);
-
+   const feed=useSelector(store=>store.feed);
+  console.log(feed);
+  
   async function  getFeed(){
  
     try {
       setLoading(true);
       if(userFeed?.length===0){
   
-        const res =await  axios.get(BASE_URL+'/feed?page=1&limit=4' ,{withCredentials:true});
+        const res =await  axios.get(BASE_URL+'/feed?page=1&limit=50' ,{withCredentials:true});
         dispatch(addFeed(res.data.data))
 
          }
@@ -35,20 +37,22 @@ const Body = () => {
     }    
   } 
   useEffect(()=>{  
-      getFeed();
-  },[])
+    getFeed();
+ },[])
+
 
 
   
   return loading ? 
     (
       <>
-      <span className="loading loading-xl loading-spinner text-error absolute left-1/2 top-1/2"></span>
+      <Loader/>
       </>
     )
-   : (<div>
-  feed
+   :feed.length === 0?<><div className=" text-center mt-40 text-2xl font-bold mb-61">NO FEED FOUNDED</div></>
+   : (<div className="flex justify-center items-center">
+     <Card {...feed[0]}  id={feed[0]?._id}/>
   </div>)
 }
 
-export default Body;
+export default Feed;

@@ -1,34 +1,45 @@
 'use client'
 import {useSelector,useDispatch} from 'react-redux';
 import axios from 'axios'
+import {useEffect, useState} from 'react';
 import { BASE_URL } from '../utils/constant';
 import { removeUser } from '../utils/store/userSlice';
 import {removeFeed} from '../utils/store/userFeedSlice';
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
 const NavBar = () => {
-const user=useSelector(store=>store.user);
+const [user,setUser]=useState(null);
+const userInSliceStore=useSelector(store=>store.user);
 const dispatch=useDispatch();
 const router=useRouter();
 
+useEffect(()=>{
+  const useStore=localStorage.getItem('user');
+  const user=JSON.parse(useStore);
+  setUser(user);
+},[userInSliceStore])
 const logoutHandler=async()=>{
   try {
    const res=await axios.post(BASE_URL+ '/logout',{},{withCredentials:true});
    dispatch(removeUser());
    dispatch(removeFeed());
+   localStorage.removeItem('user');
    router.push('/login');
   } catch (error) {
     console.log("Error" + error.message)
   }
 }
+
   return (
 <div className="navbar bg-base-100 shadow-sm">
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <Link href="/" className="btn btn-ghost text-xl">DevTinder  👨‍💻</Link>
   </div>
   <div className="flex gap-2">
-    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-    <div className=" flex items-center">{user?.firstName} {user?.lastName}</div>
+    {/* <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" /> */}
+    {user &&
+    <div className=" flex items-center">Welcome , {user?.firstName} {user?.lastName}</div>
+    }
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
@@ -53,7 +64,8 @@ const logoutHandler=async()=>{
           </div>
         </li>
         </Link>
-        <li><a>Settings</a></li>
+        <li><Link href="/connections">Connections</Link></li>
+        <li><Link href="/request">Request</Link></li>
         <li><a onClick={logoutHandler}>Logout</a></li>
       </ul>
     </div>

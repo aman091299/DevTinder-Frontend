@@ -47,8 +47,8 @@ setError('')
   console.log('res',res);
   const cookies = document.cookie;
   console.log('cookies',cookies);
-  const token = cookies.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
-console.log('token',token)
+  const token1= cookies.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+console.log('token',token1)
   console.log("login token",token1);
  if(res?.data?.success){
   dispatch(addUser(res.data.data))

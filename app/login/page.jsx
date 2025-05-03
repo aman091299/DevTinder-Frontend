@@ -45,7 +45,7 @@ setError('')
     password
   },{ withCredentials: true })
   console.log('res',res);
-  const token1 = req.cookies.get('token')?.value;
+  const token1 = document.cookie;;
   console.log("login token",token1);
  if(res?.data?.success){
   dispatch(addUser(res.data.data))

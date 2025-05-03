@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server'
 
-const protectedRoutes=['/','/profile','/connections','/request'];
+const protectedRoutes=['/request'];
 
 export const middleware=async (req)=>{
     console.log("inside middleware")

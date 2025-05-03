@@ -19,5 +19,5 @@ export const middleware=async (req)=>{
 }
 
 export const config={
-    matcher:["/login",'/', '/feed','/profile','/connections','/request']
+    matcher:["/login", '/feed','/profile','/connections','/request']
 }

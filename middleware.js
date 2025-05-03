@@ -3,11 +3,9 @@ import { NextResponse } from 'next/server'
 
 const protectedRoutes=['/','/profile','/connections','/request'];
 
-export const middleware=async (req)=>{
-    console.log("inside middleware")
+export const middleware= (req)=>{
+
     const path = req?.nextUrl?.pathname;
-   console.log('path',req?.nextUrl?.pathname);
-   console.log('all cookies', req.cookies.getAll());
     const token = req.cookies.get('token')?.value;
     console.log('token',token);
   
@@ -20,5 +18,5 @@ export const middleware=async (req)=>{
 }
 
 export const config={
-    matcher:[ '/feed','/profile','/request']
+    matcher:['/','/profile','/connections','/request']
 }

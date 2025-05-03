@@ -44,8 +44,10 @@ setError('')
     emailId:email,
     password
   },{ withCredentials: true })
+
   console.log('res',res);
   const cookies = document.cookie;
+  
   console.log('cookies',cookies);
   const token1= cookies.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
 console.log('token',token1)

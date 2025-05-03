@@ -8,7 +8,7 @@ import {removeFeed} from '../utils/store/userFeedSlice';
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
 const NavBar = () => {
-const [user,setUser]=useState(null);
+const [user,setUser]=useState('');
 const userInSliceStore=useSelector(store=>store.user);
 const dispatch=useDispatch();
 const router=useRouter();
@@ -18,6 +18,7 @@ useEffect(()=>{
   const user=JSON.parse(useStore);
   setUser(user);
 },[userInSliceStore])
+
 const logoutHandler=async()=>{
   try {
    const res=await axios.post(BASE_URL+ '/logout',{},{withCredentials:true});

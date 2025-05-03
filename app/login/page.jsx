@@ -22,6 +22,7 @@ const [lastName,setLastName]=useState('');
 const SignUpHandler=async()=>{
   try{
     const res=await axios.post(BASE_URL+'/signup',{emailId:email,password,firstName,lastName},{withCredentials:true});
+    console.log(res);
     if(res?.data?.success){
       dispatch(addUser(res?.data?.data))
       router.push('/profile')
@@ -43,9 +44,12 @@ setError('')
     emailId:email,
     password
   },{ withCredentials: true })
+ 
  if(res?.data?.success){
   dispatch(addUser(res.data.data))
-  router.push('/')
+  console.log("inside this")
+ 
+   return  router.push('/')
  }
 
  } catch (error) {

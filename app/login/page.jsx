@@ -45,7 +45,10 @@ setError('')
     password
   },{ withCredentials: true })
   console.log('res',res);
-  const token1 = document.cookie;;
+  const cookies = document.cookie;
+  console.log('cookies',cookies);
+  const token = cookies.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+console.log('token',token)
   console.log("login token",token1);
  if(res?.data?.success){
   dispatch(addUser(res.data.data))

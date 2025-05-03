@@ -44,12 +44,16 @@ setError('')
     emailId:email,
     password
   },{ withCredentials: true })
- 
+  console.log('res',res);
+  const token1 = req.cookies.get('token')?.value;
+  console.log("login token",token1);
  if(res?.data?.success){
   dispatch(addUser(res.data.data))
-  console.log("inside this")
+  console.log("inside this1")
  
-   return  router.push('/')
+   router.push('/')
+   console.log("inside this1")
+   return ;
  }
 
  } catch (error) {

@@ -10,13 +10,14 @@ const Membership = () => {
             console.log(res);
            if(res?.data?.success){
               const order=res?.data?.data;
+              console.log('order',order.orderId)
               const options = {
                 key: res?.data?.key, 
                 amount: order.amount, 
                 currency: order.currency,
                 name: order.notes.firstName,
                 description: 'Test Transaction',
-                order_id: order.id, // This is the order_id created in the backend
+                order_id: order.orderId, // This is the order_id created in the backend
                 callback_url: 'http://localhost:3000/payment-success', // Your success URL
                 theme: {
                   color: '#F37254'

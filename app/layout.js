@@ -24,6 +24,9 @@ import "./globals.css";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+    <head>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"/>
+    </head>
       <body className="h-full" >
       <Provider store={store}>
       <Navbar/>

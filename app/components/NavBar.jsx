@@ -8,7 +8,7 @@ import { removeFeed } from "../utils/store/userFeedSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 const NavBar = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState('');
   const userInSliceStore = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -30,7 +30,7 @@ const NavBar = () => {
       dispatch(removeFeed());
       localStorage.removeItem("user");
       setUser(null);
-      router.push("/login");
+     return  router.push("/login");
     } catch (error) {
       console.log("Error" + error.message);
     }
@@ -67,6 +67,7 @@ const NavBar = () => {
               )}
             </div>
           </div>
+         
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
@@ -85,7 +86,8 @@ const NavBar = () => {
             <li>
               <Link href="/membership">Membership</Link>
             </li>
-            <li>
+           <li>
+            
               <a onClick={logoutHandler}>Logout</a>
             </li>
           </ul>

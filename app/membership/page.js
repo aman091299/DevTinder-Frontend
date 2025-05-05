@@ -1,9 +1,29 @@
 'use client'
 import axios from 'axios'
 import { BASE_URL } from '../utils/constant'
+import {useEffect, useState} from 'react';
+import Loader from '../components/Loader';
 
 const Membership = () => {
-
+  const [isUserPremium,setIsUserPremium]=useState(false);
+  const [loading,setLoading]=useState(true);
+  useEffect(()=>{
+    verifyPremiumUser();
+  },[])
+    
+  const verifyPremiumUser=async()=>{
+   try {
+    setLoading(true);
+    const res=await axios.get(BASE_URL+'/premium/verify',{withCredentials:true});
+    if(res?.data?.premium){
+      setIsUserPremium(true);
+    }
+   } catch (error) {
+    console.log('Error',error);
+   }finally{
+    setLoading(false);
+   }
+  }
     const membershipHandler=async(type)=>{
         try {
             const res=await axios.post(BASE_URL + '/payment/create/order',{type:type},{withCredentials:true});
@@ -16,9 +36,9 @@ const Membership = () => {
                 amount: order.amount, 
                 currency: order.currency,
                 name: order.notes.firstName,
-                description: 'Test Transaction',
-                order_id: order.orderId, // This is the order_id created in the backend
-                callback_url: 'http://localhost:3000/payment-success', // Your success URL
+                description: 'Membership transaction',
+                order_id: order.orderId, 
+                handler:verifyPremiumUser, 
                 theme: {
                   color: '#F37254'
                 },
@@ -32,8 +52,13 @@ const Membership = () => {
         }
     }
 
+    if(loading){
+      return <div><Loader/></div> 
+    }
 
-  return (
+  return isUserPremium ?(<>
+    <div>You are premium user</div>
+  </>):(
     <div className="mb-18 mt-6">
    <div className="font-bold text-lg text-center mb-8">Silver and Gold Membership </div>
    <div className="flex justify-center gap-20">

@@ -8,6 +8,7 @@ import {useRouter} from 'next/navigation';
 const Connections = () => {
 
   const [connections,setConnections]=useState(null);
+  const [loader,setLoader]=useState(false);
  
  const router=useRouter();
 
@@ -17,26 +18,35 @@ const Connections = () => {
 
   const fetchConnections=async()=>{
     try {
+      setLoader(true);
       //connection request accepted
     const res=await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
     console.log(res)
-    setConnections(res?.data?.data);
+    if(res?.data?.data){
+      setConnections(res?.data?.data);
+    }
+   
     } catch (error) {
       if(error?.status===401){
-        router.push('/login');
+        return router.push('/login');
       }
 
       console.log("Error in Connection Page" +error.message)
     }
+    finally{
+      setLoader(false);
+    }
     
   }
-  if(!connections){
+
+
+  if(loader || !connections){
     return(<div><Loader/></div>);
   }
 
  // Clean up the connections array by filtering out null values
  const validConnections = connections?.filter(conn => conn !== null);
- if (validConnections.length === 0) {
+ if (!validConnections || validConnections?.length === 0) {
    return <div className="text-center mt-40 text-2xl font-bold mb-61">NO CONNECTIONS FOUND</div>;
  }
   return (

@@ -30,7 +30,10 @@ export default function RootLayout({ children }) {
       <body className="h-full" >
       <Provider store={store}>
       <Navbar/>
-        {children}
+      <div className="min-h-[434px]">
+      {children}
+      </div>
+       
         <Footer/>
         </Provider>
       </body>

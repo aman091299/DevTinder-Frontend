@@ -48,7 +48,10 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-
+      
+      if(!res?.data?.success){
+        setError(res?.data?.message);
+      }
       if (res?.data?.success) {
         dispatch(addUser(res.data.data));
         router.push("/");

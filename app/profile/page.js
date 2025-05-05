@@ -2,15 +2,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addUser } from "../utils/store/userSlice";
 import Card from "../components/Card";
 import {useRouter} from 'next/navigation';
+import Loader from "../components/Loader";
 
 
 const Profile = () => {
 
   const [user,setUser]=useState(null);
+  const [loader,setLoader]=useState(true);
   const [form, setForm] = useState({
     firstName:"",
     lastName:"",
@@ -26,8 +28,14 @@ const Profile = () => {
   const router=useRouter();
   
   useEffect(()=>{
+    console.log("inside profile useeffect")
     const userStore=localStorage.getItem('user');
     const parseUser=JSON.parse(userStore);
+    console.log("parsseUser",parseUser,userStore)
+    if(!parseUser){
+      return router.push("/login");
+    }
+    else{
       setUser(parseUser);
       setForm({
         firstName: parseUser.firstName || "",
@@ -38,6 +46,8 @@ const Profile = () => {
         skills: parseUser.skills || "",
         photoUrl: parseUser.photoUrl || null,
       });
+    }
+     setLoader(false);
   },[])
 
   useEffect(()=>{
@@ -60,21 +70,24 @@ const Profile = () => {
       const res = await axios.patch(BASE_URL + "/profile/edit", validForm, {
         withCredentials: true,
       });
-      dispatch(addUser(res?.data?.data));
-      setShowToast(true);
+      if(res?.data?.data){
+        dispatch(addUser(res?.data?.data));
+        setShowToast(true);
+      }
+   
       
     } catch (err) {
       setError(err?.response?.data?.message);
       if (err.status === 401) {
-        router.push("/login");
+       return router.push("/login");
       }
       console.error("Error", err);
     }
   };
  
-  if(!user){
-    return ;
-  }
+   if(loader){
+    return <Loader/>
+   }
 
   return (
     <div className="flex justify-center gap-10">

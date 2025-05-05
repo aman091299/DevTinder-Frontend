@@ -11,7 +11,7 @@ const Feed = () => {
   const userFeed=useSelector(store=>store.feed);
   const dispatch=useDispatch();
   const router=useRouter();
-  const [loading,setLoading]=useState(false);
+  const [loading,setLoading]=useState(true);
    const feed=useSelector(store=>store.feed);
   console.log(feed);
   
@@ -27,7 +27,7 @@ const Feed = () => {
          }
     } catch (error) {
       if(error?.status===401){
-        router.push('/login')
+        return router.push('/login')
       }
 
       console.log("Error in feed page" +error.message)

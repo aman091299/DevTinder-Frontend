@@ -58,7 +58,7 @@ const Connections = () => {
     <div className="flex flex-row flex-wrap mx-4 my-4">
     {
       validConnections?.map((conn)=>{
-          return   ( <Card {...conn} key={conn?._id} />) 
+          return   ( <Card {...conn} key={conn?._id} connections={true} />) 
       }
      
       )

@@ -2,9 +2,10 @@ import axios from 'axios'
 import { BASE_URL } from '../utils/constant'
 import { useDispatch } from 'react-redux'
 import {  removeFeedUser} from '../utils/store/userFeedSlice'
+import Link from 'next/link';
 
-const Card = ({id,removeConnections,connectionId,sender
-  ,firstName,lastName,age,gender,skills,about,photoUrl}) => {
+const Card = ({id,removeConnections,connectionId,sender,_id
+  ,firstName,lastName,age,gender,skills,about,photoUrl,connections}) => {
 
 const dispatch=useDispatch();
     const handleRequestSend=async(status,id)=>{
@@ -40,6 +41,11 @@ const dispatch=useDispatch();
     
     <h2 className=""> {age&&gender && age + "," +gender}</h2>
     <p> {about}</p>
+    {connections &&
+    <Link href={"/chat/" +_id}>
+<button className="btn btn-accent cursor-pointer">Chat Here</button>
+</Link>
+ }
   </div>
   {connectionId && sender &&
   <div className="mb-4 flex gap-3  ml-6">

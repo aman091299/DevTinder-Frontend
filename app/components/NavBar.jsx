@@ -32,7 +32,8 @@ const NavBar = () => {
       setUser(null);
      return  router.push("/login");
     } catch (error) {
-      console.log("Error" + error.message);
+     
+     return  console.log("Error" + error.message);
     }
   };
 

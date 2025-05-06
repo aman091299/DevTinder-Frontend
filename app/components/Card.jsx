@@ -55,7 +55,7 @@ const dispatch=useDispatch();
   }
   {connectionId && !sender &&
   <div className="text-white p-4 w-42 m-4 rounded-lg bg-green-300 border">
-    Not Accepted Yet...
+    Requested...
   </div>
   }
   {id &&

@@ -69,7 +69,7 @@ const Membership = () => {
       src="https://www.warrandytefc.com/wp-content/uploads/2016/11/Silver-membership-wfc-400x400.jpg"
       alt="Silver Membership" />
   </figure>
-  <div className="card-body pt-0">
+  <div className="card-body pt-3">
     <h2 className="card-title">Silver MemberShip Benefits</h2>
      <ul>
      <li>Chat with members for 3 months</li>

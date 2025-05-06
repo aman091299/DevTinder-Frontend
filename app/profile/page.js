@@ -28,10 +28,10 @@ const Profile = () => {
   const router=useRouter();
   
   useEffect(()=>{
-    console.log("inside profile useeffect")
+  
     const userStore=localStorage.getItem('user');
     const parseUser=JSON.parse(userStore);
-    console.log("parsseUser",parseUser,userStore)
+  
     if(!parseUser){
       return router.push("/login");
     }

@@ -100,10 +100,11 @@ const Chat = () => {
 
   return (
     <div>
-      <div className=" border w-[700px] mx-auto mt-4 mb-7 min-h-[400px] flex flex-col overflow-y-scroll h-[400px]">
+      <div className=" border w-[700px] mx-auto mt-4 mb-7 min-h-[400px] flex flex-col h-[400px]">
         <div className="text-center font-bold text-2xl py-3 border-b-1 ">
           Chatting
         </div>
+        <div className= "overflow-y-scroll">
 
         {newMessage.length !== 0 &&
           newMessage?.map((msg) => (
@@ -126,10 +127,10 @@ const Chat = () => {
                 </time>
               </div>
               <div className="chat-bubble">{msg?.text}</div>
-              <div className="chat-footer opacity-50">Seen at 12:46</div>
+              <div className="chat-footer opacity-50">Seen at 10:46</div>
             </div>
           ))}
-
+      </div>
         <div className="mt-auto border-t-1">
           <div className="mt-4 flex items-center gap-5 mb-3 ml-4 ">
             <input

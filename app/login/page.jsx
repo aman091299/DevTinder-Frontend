@@ -71,11 +71,10 @@ const Login = () => {
   ) : (
     <>
       <div className="flex justify-center mt-15 items-center mb-23">
-        <fieldset className="fieldset  bg-zinc-50 border-zinc-300  shadow-lg rounded-box w-xs border  p-5">
+        <fieldset className="fieldset  bg-base-200 border-base-300  shadow-lg rounded-box w-xs border  p-5">
           <legend className="fieldset-legend ">
             {isLogin ? "Login" : "Signup"}
           </legend>
-
           {!isLogin && (
             <>
               <label className="label my-1">FirstName</label>
@@ -132,7 +131,7 @@ const Login = () => {
           )}
 
           <div
-            className=" cursor-pointer text-[13px] font-medium"
+            className="cursor-pointer text-[13px] font-medium"
             onClick={() => {
               setEmail(''),
             setFirstName(''),

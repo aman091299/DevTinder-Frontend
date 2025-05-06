@@ -43,7 +43,7 @@ const dispatch=useDispatch();
     <p> {about}</p>
     {connections &&
     <Link href={"/chat/" +_id}>
-<button className="btn btn-accent cursor-pointer">Chat Here</button>
+<button className="btn btn-error cursor-pointer">Chat Here</button>
 </Link>
  }
   </div>

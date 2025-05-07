@@ -28,11 +28,11 @@ const dispatch=useDispatch();
   }
 
   return  (
-    <div className="card bg-base-100 w-[265px] shadow-sm mt-4 py-2 px-4">
+    <div className="card bg-base-100 w-[265px] shadow-sm mt-4 py-1 px-1">
   <figure>
   { photoUrl && <img
       src={photoUrl}
-      alt="user photo"  className="w-[220px] h-[240px] md:w-[260px] md:h-[340px] p-2 "/>
+      alt="user photo"  className="w-[220px] h-[280px] md:w-[260px] md:h-[340px] p-2 "/>
       }
   
   </figure>

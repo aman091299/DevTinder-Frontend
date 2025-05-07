@@ -49,18 +49,18 @@ const dispatch=useDispatch();
  }
   </div>
   {connectionId && sender &&
- <div className="flex gap-6 m-4">
+ <div className="flex gap-6 ">
   <button className="btn btn-primary  w-5/11" onClick={()=>handleRequest('accepted',connectionId)}>Accept</button>
   <button className="btn btn-secondary w-5/11" onClick={()=>handleRequest('rejected',connectionId)}>Reject</button>
   </div>
   }
   {connectionId && !sender &&
-  <div className="btn btn-secondary m-4">
+  <div className="btn btn-secondary ">
     Requested
   </div>
   }
   {id &&
-    <div className="flex gap-6 m-4">
+    <div className="flex gap-6 ">
   <button className="btn btn-primary w-5/11" onClick={()=>handleRequestSend('interested',id)}>Interested</button>
   <button className="btn btn-secondary w-5/11" onClick={()=>handleRequestSend('ignored',id)}>Ignored</button>
   </div>

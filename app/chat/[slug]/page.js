@@ -100,7 +100,7 @@ const Chat = () => {
 
   return (
     <div>
-      <div className=" border md:w-[740px] mx-4 md:mx-auto mt-4 mb-7  flex flex-col h-[400px] md:h-[440px]">
+      <div className=" border md:w-[740px] mx-4 md:mx-auto mt-10 md:mt-4 mb-7  flex flex-col h-[500px] md:h-[440px]">
         <div className="text-center font-bold  md:text-2xl py-2 md:py-3 border-b-1 ">
           Chatting
         </div>

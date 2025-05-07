@@ -28,15 +28,15 @@ const dispatch=useDispatch();
   }
 
   return  (
-    <div className="card bg-base-100  shadow-sm mt-4 py-1 px-1">
+    <div className="card  bg-base-200 md:bg-base-100 md:w-[260px] shadow-sm mt-4 py-1 px-1">
   <figure>
   { photoUrl && <img
       src={photoUrl}
-      alt="user photo"  className="w-[264px] h-[300px] md:w-[268px] md:h-[340px] p-2 "/>
+      alt="user photo"  className="w-[264px] h-[300px] md:w-[268px] md:h-[280px] p-2 "/>
       }
   
   </figure>
-  <div className="card-body px-[8px] ">
+  <div className="card-body px-[8px] py-[12px] ">
   <div className="flex gap-4">
     <span >{firstName && firstName + " " + lastName }</span>
     <span> {age&&gender && age + "," +gender}</span>
@@ -49,18 +49,18 @@ const dispatch=useDispatch();
  }
   </div>
   {connectionId && sender &&
- <div className="flex gap-6 ">
+ <div className="flex gap-6 mb-3 px-2 ">
   <button className="btn btn-primary  w-5/11" onClick={()=>handleRequest('accepted',connectionId)}>Accept</button>
   <button className="btn btn-secondary w-5/11" onClick={()=>handleRequest('rejected',connectionId)}>Reject</button>
   </div>
   }
   {connectionId && !sender &&
-  <div className="btn btn-secondary ">
+  <div className="btn btn-secondary mb-3 mx-2">
     Requested
   </div>
   }
   {id &&
-    <div className="flex gap-6 ">
+    <div className="flex gap-6 mb-4 mx-2">
   <button className="btn btn-primary w-5/11" onClick={()=>handleRequestSend('interested',id)}>Interested</button>
   <button className="btn btn-secondary w-5/11" onClick={()=>handleRequestSend('ignored',id)}>Ignored</button>
   </div>

@@ -28,15 +28,15 @@ const dispatch=useDispatch();
   }
 
   return  (
-    <div className="card bg-base-100 w-[265px] shadow-sm mt-4 py-1 px-1">
+    <div className="card bg-base-100 w-[327px] h-[550px] shadow-sm mt-4 py-1 px-1">
   <figure>
   { photoUrl && <img
       src={photoUrl}
-      alt="user photo"  className="w-[220px] h-[280px] md:w-[260px] md:h-[340px] p-2 "/>
+      alt="user photo"  className="w-[268px] h-[313px] md:w-[268px] md:h-[340px] p-2 "/>
       }
   
   </figure>
-  <div className="card-body gap-1 px-[11px] py-[16px]">
+  <div className="card-body gap-1 px-[29px] py-[16px]">
   <div className="flex gap-4">
     <span >{firstName && firstName + " " + lastName }</span>
     <span> {age&&gender && age + "," +gender}</span>

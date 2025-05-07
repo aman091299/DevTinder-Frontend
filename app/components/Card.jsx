@@ -28,7 +28,7 @@ const dispatch=useDispatch();
   }
 
   return  (
-    <div className="card  bg-base-200 md:bg-base-100 md:w-[260px] shadow-sm mt-4 py-1 px-1">
+    <div className="card  bg-base-300 md:bg-base-100 md:w-[260px] shadow-sm mt-4 py-1 px-1">
   <figure>
   { photoUrl && <img
       src={photoUrl}
@@ -36,7 +36,7 @@ const dispatch=useDispatch();
       }
   
   </figure>
-  <div className="card-body px-[8px] py-[12px] ">
+  <div className="card-body w-[264px] px-[8px] py-[12px] ">
   <div className="flex gap-4">
     <span >{firstName && firstName + " " + lastName }</span>
     <span> {age&&gender && age + "," +gender}</span>

@@ -57,7 +57,7 @@ const Membership = () => {
     }
 
   return isUserPremium ?(<>
-    <div className="text-2xl flex justify-center items-center font-bold">You are premium user</div>
+    <div className="text-2xl flex justify-center items-center h-screen font-bold">You are premium user</div>
   </>):(
     <div className="mb-18 mt-6">
    <div className="font-bold text-lg text-center mb-8">Silver and Gold Membership </div>

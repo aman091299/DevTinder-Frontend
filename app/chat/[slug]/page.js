@@ -100,7 +100,7 @@ const Chat = () => {
 
   return (
     <div>
-      <div className=" border md:w-[740px] mx-4 md:mx-auto mt-4 mb-7  flex flex-col md:h-[440px]">
+      <div className=" border md:w-[740px] mx-4 md:mx-auto mt-4 mb-7  flex flex-col h-[400px] md:h-[440px]">
         <div className="text-center font-bold  md:text-2xl py-2 md:py-3 border-b-1 ">
           Chatting
         </div>
@@ -143,7 +143,7 @@ const Chat = () => {
               className=" placeholder:text-xs md:placeholder:text-lg  pl-2 md:pl-6 md:py-3 py-1.5 w-8/10 md:w-8/10 border-1 rounded-lg focus:outline-none"
             />
             <button
-              className="btn btn-success py-1.5 md:py-6 px-6 md:px-10"
+              className="btn  btn-secondary py-1.5 md:py-6 px-6 md:px-10"
               onClick={() => sendMessage(message)}
             >
               Send

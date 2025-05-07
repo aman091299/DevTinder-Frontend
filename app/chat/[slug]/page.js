@@ -28,7 +28,7 @@ const Chat = () => {
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
       });
-
+        console.log("chat",chat)
       if (!chat?.data?.data) {
         return setNewMessage("");
       }
@@ -100,11 +100,11 @@ const Chat = () => {
 
   return (
     <div>
-      <div className=" border w-[700px] mx-auto mt-4 mb-7 min-h-[400px] flex flex-col h-[400px]">
-        <div className="text-center font-bold text-2xl py-3 border-b-1 ">
+      <div className=" border md:w-[740px] mx-4 md:mx-auto mt-4 mb-7  flex flex-col md:h-[440px]">
+        <div className="text-center font-bold  md:text-2xl py-2 md:py-3 border-b-1 ">
           Chatting
         </div>
-        <div className= "overflow-y-scroll">
+        <div className= "overflow-y-scroll py-2 md:py-3 px-2 md:px-4">
 
         {newMessage.length !== 0 &&
           newMessage?.map((msg) => (
@@ -112,7 +112,7 @@ const Chat = () => {
             <div key={msg?._id} className={"chat " + (msg?.senderId===userId? "chat-end":"chat-start") }>
               <div className="chat-image avatar">
             
-                <div className="w-10 rounded-full">
+                <div className=" w-8 md:w-10 rounded-full">
                
                   <img
                     alt="Tailwind CSS chat bubble component"
@@ -126,13 +126,13 @@ const Chat = () => {
                   {formatDate(msg?.date)}
                 </time>
               </div>
-              <div className="chat-bubble">{msg?.text}</div>
+              <div className="chat-bubble min-h-4 py-.7 px-1 md:min-h-6 md:py-3 md:px-4">{msg?.text}</div>
               <div className="chat-footer opacity-50">Seen at 10:46</div>
             </div>
           ))}
       </div>
         <div className="mt-auto border-t-1">
-          <div className="mt-4 flex items-center gap-5 mb-3 ml-4 ">
+          <div className="flex items-center gap-6 m-4 ">
             <input
               type="text"
               placeholder="Send the message"
@@ -140,10 +140,10 @@ const Chat = () => {
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
-              className="py-2 px-4 border-1 rounded-lg focus:outline-none"
+              className=" placeholder:text-xs md:placeholder:text-lg  pl-2 md:pl-6 md:py-3 py-1.5 w-8/10 md:w-8/10 border-1 rounded-lg focus:outline-none"
             />
             <button
-              className="btn btn-success py-2"
+              className="btn btn-success py-1.5 md:py-6 px-6 md:px-10"
               onClick={() => sendMessage(message)}
             >
               Send

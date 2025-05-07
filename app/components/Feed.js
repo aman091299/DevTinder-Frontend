@@ -8,6 +8,7 @@ import axios from 'axios';
 import Loader from './Loader';
 import Card from './Card'
 const Feed = () => {
+  console.log("hey feed page")
   const userFeed=useSelector(store=>store.feed);
   const dispatch=useDispatch();
   const router=useRouter();
@@ -16,7 +17,7 @@ const Feed = () => {
   console.log(feed);
   
   async function  getFeed(){
- 
+    console.log("hey feed page3")
     try {
       setLoading(true);
       if(userFeed?.length===0){
@@ -37,11 +38,12 @@ const Feed = () => {
     }    
   } 
   useEffect(()=>{  
+    console.log("hey feed page2")
     getFeed();
  },[])
 
 
-
+ console.log("hey feed page1")
   
   return loading ? 
     (
@@ -50,7 +52,7 @@ const Feed = () => {
       </>
     )
    :feed.length === 0?<><div className=" text-center mt-40 text-2xl font-bold mb-61">NO FEED FOUNDED</div></>
-   : (<div className="flex justify-center items-center">
+   : (<div className="flex justify-center items-center mb-10">
      <Card {...feed[0]}  id={feed[0]?._id}/>
   </div>)
 }

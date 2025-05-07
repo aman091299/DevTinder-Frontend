@@ -51,11 +51,11 @@ const Connections = () => {
  }
   return (
     <div >
-    <div className="text-center my-2 text-2xl font-bold">
+    <div className="text-center mt-1 md:mt-2 text-2xl font-bold">
     Connections
     </div>
-    <div>
-    <div className="flex flex-row flex-wrap mx-4 my-4">
+    <div className="mx-8">
+    <div className="flex flex-row justify-center md:justify-normal flex-wrap gap-4 md:gap-11 mb-5 ">
     {
       validConnections?.map((conn)=>{
           return   ( <Card {...conn} key={conn?._id} connections={true} />) 

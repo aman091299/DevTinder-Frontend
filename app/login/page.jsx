@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/store/userSlice";
 
 const Login = () => {
+  console.log("inside login page")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);

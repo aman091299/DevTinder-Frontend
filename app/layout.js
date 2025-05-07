@@ -28,9 +28,10 @@ export default function RootLayout({ children }) {
     <script src="https://checkout.razorpay.com/v1/checkout.js"/>
     </head>
       <body className="h-full" >
+      {console.log("inside rootlayout")}
       <Provider store={store}>
       <Navbar/>
-      <div className="min-h-[434px]">
+      <div>
       {children}
       </div>
        

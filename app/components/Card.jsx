@@ -28,7 +28,7 @@ const dispatch=useDispatch();
   }
 
   return  (
-    <div className="card bg-base-100 w-[274px] shadow-sm mx-4 my-4">
+    <div className="card bg-base-100 w-[265px] shadow-sm mt-4">
   <figure>
   { photoUrl && <img
       src={photoUrl}
@@ -36,32 +36,33 @@ const dispatch=useDispatch();
       }
   
   </figure>
-  <div className="card-body">
-    <h2 className="">{firstName && firstName + " " + lastName}</h2>
-    
-    <h2 className=""> {age&&gender && age + "," +gender}</h2>
+  <div className="card-body gap-1 px-[11px] py-[16px]">
+  <div className="flex gap-4">
+    <span >{firstName && firstName + " " + lastName }</span>
+    <span> {age&&gender && age + "," +gender}</span>
+    </div>
     <p> {about}</p>
     {connections &&
     <Link href={"/chat/" +_id}>
-<button className="btn btn-error cursor-pointer">Chat Here</button>
+<button className="btn btn-error cursor-pointer w-full mt-2">Chat Here</button>
 </Link>
  }
   </div>
   {connectionId && sender &&
-  <div className="mb-4 flex gap-3  ml-6">
-  <button className="btn btn-primary" onClick={()=>handleRequest('accepted',connectionId)}>Accept</button>
-  <button className="btn btn-secondary" onClick={()=>handleRequest('rejected',connectionId)}>Reject</button>
+ <div className="flex gap-6 m-4">
+  <button className="btn btn-primary  w-5/11" onClick={()=>handleRequest('accepted',connectionId)}>Accept</button>
+  <button className="btn btn-secondary w-5/11" onClick={()=>handleRequest('rejected',connectionId)}>Reject</button>
   </div>
   }
   {connectionId && !sender &&
-  <div className="text-white p-4 w-42 m-4 rounded-lg bg-green-300 border">
-    Requested...
+  <div className="btn btn-error m-4">
+    Requested
   </div>
   }
   {id &&
-    <div className="mb-4 flex gap-3  ml-6">
-  <button className="btn btn-primary" onClick={()=>handleRequestSend('interested',id)}>Interested</button>
-  <button className="btn btn-secondary" onClick={()=>handleRequestSend('ignored',id)}>Ignored</button>
+    <div className="flex gap-6 m-4">
+  <button className="btn btn-primary w-5/11" onClick={()=>handleRequestSend('interested',id)}>Interested</button>
+  <button className="btn btn-secondary w-5/11" onClick={()=>handleRequestSend('ignored',id)}>Ignored</button>
   </div>
   }
 </div>

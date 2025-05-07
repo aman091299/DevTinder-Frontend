@@ -90,10 +90,10 @@ const Profile = () => {
    }
 
   return (
-    <div className="flex justify-center gap-10">
-      <div className="my-6 ml-8 flex ">
+    <div className="flex flex-col  items-center md:flex-row md:justify-center md:gap-20">
+      <div className="my-2 md:my-6  md:flex">
         <form onSubmit={(e) => submitHandler(e)}>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 ">
+          <fieldset className="fieldset mx-auto w-[275px] bg-base-200 border-base-300 rounded-box md:w-xs border p-4 ">
             <legend className="fieldset-legend">Profile Edit</legend>
             <label className="label">First Name</label>
             <input
@@ -186,7 +186,7 @@ const Profile = () => {
           </fieldset>
         </form>
       </div>
-      <div className="my-10 ml-8 ">
+      <div>
         <Card {...form} />
       </div>
 

@@ -8,6 +8,8 @@ import { removeFeed } from "../utils/store/userFeedSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 const NavBar = () => {
+  
+  console.log("inside navbar")
   const [user, setUser] = useState('');
   const userInSliceStore = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -38,13 +40,13 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="flex-1">
-        <Link href="/" className="btn btn-ghost text-xl">
+    <div className="navbar  p-[3px] md:p-1 min-h-0 md:min-h-16 flex justify-between  gap-8 md:gap-0 bg-base-100 shadow-sm">
+      <div className="flex:0   md:flex-1">
+        <Link href="/" className="btn btn-ghost text-[10px] md:text-xl">
           DevTinder 👨‍💻
         </Link>
       </div>
-      <div className="flex gap-2">
+      <div className="flex  gap-2  text-[10px] md:text-xl">
         {/* <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" /> */}
         {user && (
           <div className=" flex items-center">

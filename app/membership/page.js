@@ -57,11 +57,11 @@ const Membership = () => {
     }
 
   return isUserPremium ?(<>
-    <div>You are premium user</div>
+    <div className="text-2xl flex justify-center items-center font-bold">You are premium user</div>
   </>):(
     <div className="mb-18 mt-6">
    <div className="font-bold text-lg text-center mb-8">Silver and Gold Membership </div>
-   <div className="flex justify-center gap-20">
+   <div className="flex  flex-col items-center md:flex-row md:justify-center gap-20">
    <div className=" w-84 shadow-sm">
   <figure>
     <img
@@ -71,7 +71,7 @@ const Membership = () => {
   </figure>
   <div className="card-body pt-3">
     <h2 className="card-title">Silver MemberShip Benefits</h2>
-     <ul>
+     <ul className="list-disc">
      <li>Chat with members for 3 months</li>
     <li>Send requests to up to 50 users per day</li>
     <li>Access to exclusive member-only content</li>
@@ -79,7 +79,7 @@ const Membership = () => {
     <li>Discounts on premium features and services</li>
      </ul>
     <div className="card-actions justify-end mt-3">
-      <button className="btn btn-secondary" onClick={()=>membershipHandler('silver')}>Buy Now</button>
+      <button className="btn btn-secondary w-full" onClick={()=>membershipHandler('silver')}>Buy Now</button>
     </div>
   </div>
 </div>
@@ -91,16 +91,16 @@ const Membership = () => {
       alt="Silver Membership" />
   </figure>
   <div className="card-body ">
-    <h2 className="card-title mt-4">Gold MemberShip Benefits</h2>
-     <ul>
+    <h2 className="card-title mt-8">Gold MemberShip Benefits</h2>
+     <ul  className="list-disc">
      <li>Chat with members for 9 months</li>
     <li>Send requests to up to 100 users per day</li>
     <li>Access to exclusive member-only content</li>
     <li>Receive priority customer support</li>
     <li>Discounts on premium features and services</li>
      </ul>
-    <div className="card-actions justify-end mt-3">
-      <button className="btn btn-warning text-white" onClick={()=>membershipHandler('gold')}>Buy Now</button>
+    <div className="card-actions justify-end mt-4">
+      <button className="btn btn-warning text-white w-full" onClick={()=>membershipHandler('gold')}>Buy Now</button>
     </div>
   </div>
 </div>

@@ -40,13 +40,13 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar  p-[3px] md:p-1 min-h-0 md:min-h-16 flex justify-between  gap-8 md:gap-0 bg-base-100 shadow-sm">
+    <div className="navbar  p-[8px] md:p-1 min-h-0 md:min-h-16 flex justify-between  gap-2 md:gap-0 bg-base-100 shadow-sm">
       <div className="flex:0   md:flex-1">
-        <Link href="/" className="btn btn-ghost text-[10px] md:text-xl">
+        <Link href="/" className="btn btn-ghost text-[16px] md:text-xl">
           DevTinder 👨‍💻
         </Link>
       </div>
-      <div className="flex  gap-2  text-[10px] md:text-xl">
+      <div className="flex  gap-2  text-[16px] md:text-xl">
         {/* <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" /> */}
         {user && (
           <div className=" flex items-center">

@@ -6,11 +6,13 @@ import Card from '../components/Card';
 import Loader from '../components/Loader'
 import {useRouter} from 'next/navigation';
 const Connections = () => {
+  console.log("connections page")
   const [connections,setConnections]=useState(null);
   const [loader,setLoader]=useState(false);
    const router=useRouter();
 
   useEffect(()=>{
+    console.log("connections page useEffect")
     if (typeof window !== "undefined") {
       const useStore = localStorage.getItem("user");
       const user = JSON.parse(useStore);

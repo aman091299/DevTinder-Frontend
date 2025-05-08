@@ -7,23 +7,28 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constant";
 
 const Chat = () => {
+ 
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState("");
+  const user = useSelector((store) => store.user);
   const params = useParams();
   const targetUserId = params.slug;
-  const user = useSelector((store) => store.user);
+ 
 
   const userId = user?._id;
   const firstName = user?.firstName;
   const photoUrl = user?.photoUrl;
+
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
     });
   };
+
   const fetchGetChat = async () => {
     try {
+      console.log("inside fetch get chat")
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
       });
@@ -46,19 +51,20 @@ const Chat = () => {
         };
       });
 
-      setNewMessage((prev) => [...chatDetails]);
+      setNewMessage([...chatDetails]);
     } catch (error) {
       console.log("Error in fetch chat data", error);
     }
   };
   useEffect(() => {
-    console.log("inside socket useffecct11");
+    console.log("inside socket useffecct12");
     fetchGetChat();
   }, []);
 
   useEffect(() => {
+    console.log("inside socket useffecct1");
     const socket = createSocketConnection();
-
+    console.log("inside socket useffecct3");
     socket.emit("joinChat", { targetUserId, userId, firstName });
     //it is recieving message continuously listning for message
     socket.on("messageRecieved", ({ text, firstName, photoUrl, userId }) => {

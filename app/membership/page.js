@@ -27,10 +27,9 @@ const Membership = () => {
     const membershipHandler=async(type)=>{
         try {
             const res=await axios.post(BASE_URL + '/payment/create/order',{type:type},{withCredentials:true});
-            console.log(res);
+          
            if(res?.data?.success){
               const order=res?.data?.data;
-              console.log('order',order.orderId)
               const options = {
                 key: res?.data?.key, 
                 amount: order.amount, 
@@ -44,7 +43,6 @@ const Membership = () => {
                 },
               };
               const rzp = new Razorpay(options);
-              console.log('rzp',rzp)
               rzp.open();
            }
         } catch (error) {

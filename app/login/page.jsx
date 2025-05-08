@@ -14,11 +14,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const router = useRouter();
-  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const SignUpHandler = async () => {
     try {
@@ -27,8 +27,8 @@ const Login = () => {
         { emailId: email, password, firstName, lastName },
         { withCredentials: true }
       );
-      console.log(res);
       if (res?.data?.success) {
+   
         dispatch(addUser(res?.data?.data));
         router.push("/profile");
       }
@@ -54,6 +54,7 @@ const Login = () => {
         setError(res?.data?.message);
       }
       if (res?.data?.success) {
+        
         dispatch(addUser(res.data.data));
         router.push("/");
         return;

@@ -6,14 +6,22 @@ import Card from '../components/Card';
 import Loader from '../components/Loader'
 import {useRouter} from 'next/navigation';
 const Connections = () => {
-
   const [connections,setConnections]=useState(null);
   const [loader,setLoader]=useState(false);
- 
- const router=useRouter();
+   const router=useRouter();
 
   useEffect(()=>{
-    fetchConnections();
+    if (typeof window !== "undefined") {
+      const useStore = localStorage.getItem("user");
+      const user = JSON.parse(useStore);
+       if(!user){
+        return router.push('/');
+       }
+       else{
+        fetchConnections();
+       }
+    }
+   
 },[])
 
   const fetchConnections=async()=>{
@@ -21,7 +29,7 @@ const Connections = () => {
       setLoader(true);
       //connection request accepted
     const res=await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
-    console.log(res)
+
     if(res?.data?.data){
       setConnections(res?.data?.data);
     }

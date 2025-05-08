@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constant";
 
 const Chat = () => {
-
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const params = useParams();
@@ -28,7 +27,7 @@ const Chat = () => {
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
       });
-        console.log("chat",chat)
+      console.log("chat", chat);
       if (!chat?.data?.data) {
         return setNewMessage("");
       }
@@ -43,7 +42,7 @@ const Chat = () => {
           photoUrl: mes.senderId.photoUrl,
           date: mes.createdAt,
           _id: mes._id,
-          senderId:mes.senderId._id
+          senderId: mes.senderId._id,
         };
       });
 
@@ -62,7 +61,7 @@ const Chat = () => {
 
     socket.emit("joinChat", { targetUserId, userId, firstName });
     //it is recieving message continuously listning for message
-    socket.on("messageRecieved", ({ text, firstName, photoUrl,userId }) => {
+    socket.on("messageRecieved", ({ text, firstName, photoUrl, userId }) => {
       setNewMessage((prev) => [
         ...prev,
         {
@@ -71,7 +70,7 @@ const Chat = () => {
           date: Date.now(),
           photoUrl,
           _id: Date.now().toString(),
-          senderId:userId
+          senderId: userId,
         },
       ]);
     });
@@ -90,7 +89,6 @@ const Chat = () => {
         text: message,
         firstName,
         photoUrl,
-        
       });
       return setMessage("");
     } else {
@@ -104,33 +102,37 @@ const Chat = () => {
         <div className="text-center font-bold  md:text-2xl py-2 md:py-3 border-b-1 ">
           Chatting
         </div>
-        <div className= "overflow-y-scroll py-2 md:py-3 px-2 md:px-4">
-
-        {newMessage.length !== 0 &&
-          newMessage?.map((msg) => (
-      
-            <div key={msg?._id} className={"chat " + (msg?.senderId===userId? "chat-end":"chat-start") }>
-              <div className="chat-image avatar">
-            
-                <div className=" w-8 md:w-10 rounded-full">
-               
-                  <img
-                    alt="Tailwind CSS chat bubble component"
-                    src={msg?.photoUrl}
-                  />
+        <div className="overflow-y-scroll py-2 md:py-3 px-2 md:px-4">
+          {newMessage.length !== 0 &&
+            newMessage?.map((msg) => (
+              <div
+                key={msg?._id}
+                className={
+                  "chat " +
+                  (msg?.senderId === userId ? "chat-end" : "chat-start")
+                }
+              >
+                <div className="chat-image avatar">
+                  <div className=" w-8 md:w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS chat bubble component"
+                      src={msg?.photoUrl}
+                    />
+                  </div>
                 </div>
+                <div className="chat-header">
+                  {msg?.firstName}
+                  <time className="text-xs opacity-50">
+                    {formatDate(msg?.date)}
+                  </time>
+                </div>
+                <div className="chat-bubble min-h-4 py-.7 px-1 md:min-h-6 md:py-3 md:px-4">
+                  {msg?.text}
+                </div>
+                <div className="chat-footer opacity-50">Seen at 10:46</div>
               </div>
-              <div className="chat-header">
-                {msg?.firstName}
-                <time className="text-xs opacity-50">
-                  {formatDate(msg?.date)}
-                </time>
-              </div>
-              <div className="chat-bubble min-h-4 py-.7 px-1 md:min-h-6 md:py-3 md:px-4">{msg?.text}</div>
-              <div className="chat-footer opacity-50">Seen at 10:46</div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
         <div className="mt-auto border-t-1">
           <div className="flex items-center gap-6 m-4 ">
             <input

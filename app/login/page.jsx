@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import React, { use } from "react";
-import { useState } from "react";
+
+import { useState,useEffect } from "react";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/store/userSlice";
@@ -17,10 +17,19 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [showtoast, setShowToast] = useState(false);
+
   const router = useRouter();
   const dispatch = useDispatch();
+useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [showtoast]);
 
   const SignUpHandler = async () => {
+    setError('')
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
@@ -31,8 +40,10 @@ const Login = () => {
        return  setError(res?.data?.message);
       }
       if (res?.data?.success) {
+        setError('')
         dispatch(addUser(res?.data?.data));
         router.push("/profile");
+        setShowToast(true);
       }
     } catch (error) {
       console.log(error);
@@ -56,9 +67,12 @@ const Login = () => {
         return setError(res?.data?.message);
       }
       if (res?.data?.success) {
+        setError('')
         dispatch(addUser(res.data.data));
+        setShowToast(true);
         router.push("/");
-        return;
+       
+       
       }
     } catch (error) {
       setError(error?.response?.data?.message);
@@ -149,6 +163,13 @@ const Login = () => {
 
           {error && <div className="text-red-700 text-md mt-1">{error}</div>}
         </fieldset>
+        {showtoast && (
+        <div className="toast toast-top toast-center ">
+          <div className="alert alert-success">
+            <span>{isLogin?"User Login Sucessfully":"User SignUp Successfully"}</span>
+          </div>
+        </div>
+      )}
       </div>
     </>
   );

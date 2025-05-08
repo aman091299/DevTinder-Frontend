@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/store/userSlice";
 
 const Login = () => {
-  console.log("inside login page")
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,6 @@ const Login = () => {
         { withCredentials: true }
       );
       if (res?.data?.success) {
-   
         dispatch(addUser(res?.data?.data));
         router.push("/profile");
       }
@@ -49,12 +48,11 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      
-      if(!res?.data?.success){
+
+      if (!res?.data?.success) {
         setError(res?.data?.message);
       }
       if (res?.data?.success) {
-        
         dispatch(addUser(res.data.data));
         router.push("/");
         return;
@@ -135,16 +133,16 @@ const Login = () => {
           <div
             className="cursor-pointer text-[13px] font-medium"
             onClick={() => {
-              setEmail(''),
-            setFirstName(''),
-            setPassword(''),
-            setLastName(''),
-              setIsLogin((prev) => !prev
-            )
-            }
-           }
+              setEmail(""),
+                setFirstName(""),
+                setPassword(""),
+                setLastName(""),
+                setIsLogin((prev) => !prev);
+            }}
           >
-            {isLogin ? "New User -> SignUp from Here" : "Alreardy Have Account -> Login from Here"}
+            {isLogin
+              ? "New User -> SignUp from Here"
+              : "Alreardy Have Account -> Login from Here"}
           </div>
 
           {error && <div className="text-red-700 text-md mt-1">{error}</div>}

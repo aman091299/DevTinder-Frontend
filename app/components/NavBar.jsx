@@ -8,14 +8,14 @@ import { removeFeed } from "../utils/store/userFeedSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 const NavBar = () => {
-  console.log("inside navbar");
+
   const [user, setUser] = useState(null);
   const userInSliceStore = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    console.log("inside nav bar useeffect");
+
     if (typeof window !== "undefined" && !user) {
       const useStore = localStorage.getItem("user");
       const user = JSON.parse(useStore);
@@ -34,7 +34,7 @@ const NavBar = () => {
       dispatch(removeFeed());
       localStorage.removeItem("user");
       setUser(null);
-      return router.push("/login");
+      router.push("/login");
     } catch (error) {
       return console.log("Error" + error.message);
     }

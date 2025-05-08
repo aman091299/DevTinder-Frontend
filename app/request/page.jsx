@@ -15,7 +15,7 @@ const Request = () => {
       const useStore = localStorage.getItem("user");
       const user = JSON.parse(useStore);
       if (!user) {
-        return router.push("/");
+        router.push("/");
       } else {
         fetchConnectionsRequest();
       }
@@ -35,7 +35,7 @@ const Request = () => {
       const res = await axios.get(BASE_URL + "/user/requests/recieved", {
         withCredentials: true,
       });
-      console.log(res?.data);
+     
       setConnectionsRequest(res?.data?.data);
     } catch (error) {
       if (error?.status === 401) {
@@ -52,7 +52,7 @@ const Request = () => {
       </div>
     );
   }
-  console.log(connectionsRequest);
+ 
   const validConnections = connectionsRequest.filter((conn) => {
     return conn !== null;
   });

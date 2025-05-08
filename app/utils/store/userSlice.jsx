@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-console.log("inside user slcie")
+
 const userSlice=createSlice({
     name:"user",
     initialState:null,

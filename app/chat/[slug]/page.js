@@ -28,11 +28,11 @@ const Chat = () => {
 
   const fetchGetChat = async () => {
     try {
-      console.log("inside fetch get chat")
+      
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
       });
-      console.log("chat", chat);
+    
       if (!chat?.data?.data) {
         return setNewMessage("");
       }
@@ -57,14 +57,14 @@ const Chat = () => {
     }
   };
   useEffect(() => {
-    console.log("inside socket useffecct12");
+  
     fetchGetChat();
   }, []);
 
   useEffect(() => {
-    console.log("inside socket useffecct1");
+ 
     const socket = createSocketConnection();
-    console.log("inside socket useffecct3");
+   
     socket.emit("joinChat", { targetUserId, userId, firstName });
     //it is recieving message continuously listning for message
     socket.on("messageRecieved", ({ text, firstName, photoUrl, userId }) => {
@@ -81,7 +81,7 @@ const Chat = () => {
       ]);
     });
     return () => {
-      console.log("disconnect websocket");
+     
       socket.disconnect();
     };
   }, [userId, targetUserId]);

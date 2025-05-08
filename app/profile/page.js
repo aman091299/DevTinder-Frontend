@@ -32,7 +32,7 @@ const Profile = () => {
       const parseUser = JSON.parse(userStore);
 
       if (!parseUser) {
-        return router.push("/login");
+         router.push("/login");
       } else {
         setUser(parseUser);
         setForm({
@@ -76,7 +76,7 @@ const Profile = () => {
     } catch (err) {
       setError(err?.response?.data?.message);
       if (err.status === 401) {
-        return router.push("/login");
+         router.push("/login");
       }
       console.error("Error", err);
     }

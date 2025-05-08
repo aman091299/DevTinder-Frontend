@@ -1,6 +1,6 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
-console.log("user feed slice")
+
 const userFeedSlice=createSlice({
     name:"feed",
     initialState:[],

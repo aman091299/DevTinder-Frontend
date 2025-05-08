@@ -5,7 +5,6 @@ const protectedRoutes=['/','/profile','/connections','/request'];
 
 export const middleware= (request)=>{
  try{
-    // console.log('inside middlewarre',request);
     const path = request?.nextUrl?.pathname;
    const token = request.headers.get("authorization")?.split(" ")[1] || request.cookies.get("token")?.value||1;
     console.log('token inside middleware',token)

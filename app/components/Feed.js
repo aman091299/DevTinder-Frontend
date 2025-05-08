@@ -9,7 +9,7 @@ import Loader from "./Loader";
 import Card from "./Card";
 
 const Feed = () => {
-  console.log("hey feed page");
+ 
   const [loading, setLoading] = useState(true);
   const feed = useSelector((store) => store.feed);
 
@@ -20,7 +20,7 @@ const Feed = () => {
     if (typeof window !== "undefined") {
       const userParse = localStorage.getItem("user");
       const user = JSON.parse(userParse);
-      console.log("user", null);
+    
       if (!user) {
         router.push("/login");
       } else {

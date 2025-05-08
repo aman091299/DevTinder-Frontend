@@ -27,6 +27,9 @@ const Login = () => {
         { emailId: email, password, firstName, lastName },
         { withCredentials: true }
       );
+      if (!res?.data?.success) {
+       return  setError(res?.data?.message);
+      }
       if (res?.data?.success) {
         dispatch(addUser(res?.data?.data));
         router.push("/profile");
@@ -50,7 +53,7 @@ const Login = () => {
       );
 
       if (!res?.data?.success) {
-        setError(res?.data?.message);
+        return setError(res?.data?.message);
       }
       if (res?.data?.success) {
         dispatch(addUser(res.data.data));
@@ -59,8 +62,7 @@ const Login = () => {
       }
     } catch (error) {
       setError(error?.response?.data?.message);
-
-      console.error("Error  " + error.message);
+       console.error("Error  " + error.message);
     }
   }
 

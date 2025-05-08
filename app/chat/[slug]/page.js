@@ -7,13 +7,12 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constant";
 
 const Chat = () => {
- 
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState("");
-  const user = useSelector((store) => store.user);
+  const userSlice = useSelector((store) => store.user);
+  const [user,setUser]=useState(userSlice);
   const params = useParams();
   const targetUserId = params.slug;
- 
 
   const userId = user?._id;
   const firstName = user?.firstName;
@@ -28,11 +27,10 @@ const Chat = () => {
 
   const fetchGetChat = async () => {
     try {
-      
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
       });
-    
+
       if (!chat?.data?.data) {
         return setNewMessage("");
       }
@@ -56,15 +54,21 @@ const Chat = () => {
       console.log("Error in fetch chat data", error);
     }
   };
+
   useEffect(() => {
-  
     fetchGetChat();
   }, []);
 
   useEffect(() => {
- 
+    if (typeof window !== "undefined") {
+      const userParse = localStorage.getItem("user");
+      const user = JSON.parse(userParse);
+      if (!user) {
+        setUser(user);
+      }
+    }
     const socket = createSocketConnection();
-   
+
     socket.emit("joinChat", { targetUserId, userId, firstName });
     //it is recieving message continuously listning for message
     socket.on("messageRecieved", ({ text, firstName, photoUrl, userId }) => {
@@ -81,7 +85,6 @@ const Chat = () => {
       ]);
     });
     return () => {
-     
       socket.disconnect();
     };
   }, [userId, targetUserId]);

@@ -14,6 +14,7 @@ const UploadImage = ({setForm}) => {
                 setPreviewUrl(reader.result);
                 setSelectedFile(file);
                 // If you want to update the form with the file or URL
+                console.log('photoUrl',reader.result);
                 setForm(prev => ({ ...prev, photoUrl:reader.result }));
             };
             reader.readAsDataURL(file);

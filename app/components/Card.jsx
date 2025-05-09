@@ -45,7 +45,7 @@ const dispatch=useDispatch();
   }
 
   return  (
-    <div className="card  bg-base-300 md:bg-base-100 md:w-[calc(100/4)] shadow-sm mt-4 py-1 px-1">
+    <div className="card  bg-base-300 md:bg-base-100 md:w-[calc(100%/4px)] shadow-sm mt-4 py-1 px-1">
   <figure>
   { photoUrl && <img
       src={photoUrl}

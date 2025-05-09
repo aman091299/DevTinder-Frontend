@@ -81,9 +81,9 @@ const dispatch=useDispatch();
   </div>
   }
   {connectionId && !sender &&
-  <button disabled className="bg-gray-500  text-gray-300 py-2 px-4 rounded-sm text-center mb-3 mx-2">
-    Request had Sended
-  </button>
+  <div className="bg-gray-500  text-gray-300 py-2 px-4 rounded-sm text-center mb-3 mx-2">
+    Pending
+  </div>
   }
   {id &&
     <div className="flex gap-6 mb-4 mx-2">

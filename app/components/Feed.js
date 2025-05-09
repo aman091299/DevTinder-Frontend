@@ -17,28 +17,33 @@ const Feed = () => {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("user inside use effect")
     if (typeof window !== "undefined") {
       const userParse = localStorage.getItem("user");
       const user = JSON.parse(userParse);
-    
+    console.log("user",user)
       if (!user) {
         router.push("/login");
       } else {
-        getFeed();
+        getFeed(feed);
       }
     }
   }, []);
 
-  async function getFeed() {
+  async function getFeed(feed) {
     try {
+
       setLoading(true);
-      if (feed?.length === 0) {
+      console.log("get feedss",feed)
+    
         const res = await axios.get(BASE_URL + "/feed?page=1&limit=50", {
           withCredentials: true,
         });
+        console.log("res",res);
         dispatch(addFeed(res?.data?.data));
-      }
+     
     } catch (error) {
+       console.log("inside error",error)
       if (error?.status === 401) {
         return router.push("/login");
       }

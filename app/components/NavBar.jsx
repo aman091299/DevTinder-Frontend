@@ -14,6 +14,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const removeFocusHandler=()=>{
+    document.activeElement.blur();
+  }
   useEffect(() => {
 
     if (typeof window !== "undefined" && !user) {
@@ -24,6 +27,8 @@ const NavBar = () => {
   }, [userInSliceStore]);
 
   const logoutHandler = async () => {
+   
+    removeFocusHandler();
     try {
       const res = await axios.post(
         BASE_URL + "/logout",
@@ -34,6 +39,7 @@ const NavBar = () => {
       dispatch(removeFeed());
       localStorage.removeItem("user");
       setUser(null);
+      
       router.push("/login");
     } catch (error) {
       return console.log("Error" + error.message);
@@ -78,20 +84,21 @@ const NavBar = () => {
           >
             <Link href="/profile">
               <li>
-                <div className="justify-between">Profile</div>
+                <div className="justify-between" onClick={removeFocusHandler}>Profile</div>
               </li>
             </Link>
             <li>
-              <Link href="/connections">Connections</Link>
+              <Link href="/connections"  onClick={removeFocusHandler}>Connections</Link>
             </li>
             <li>
-              <Link href="/request">Request</Link>
+              <Link href="/request"  onClick={removeFocusHandler}>Request</Link>
             </li>
             <li>
-              <Link href="/membership">Membership</Link>
+              <Link href="/membership"  onClick={removeFocusHandler}>Membership</Link>
             </li>
             <li>
-              <a onClick={logoutHandler}>Logout</a>
+              <a onClick={logoutHandler
+              } >Logout</a>
             </li>
           </ul>
         </div>

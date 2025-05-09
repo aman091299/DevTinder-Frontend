@@ -74,7 +74,7 @@ const Membership = () => {
     <li>Send requests to up to 50 users per day</li>
     <li>Access to exclusive member-only content</li>
     <li>Receive priority customer support</li>
-    <li>Discounts on premium features and services</li>
+    <li>Discounts on premium features </li>
      </ul>
     <div className="card-actions justify-end mt-3">
       <button className="btn btn-secondary w-full" onClick={()=>membershipHandler('silver')}>Buy Now</button>
@@ -86,7 +86,7 @@ const Membership = () => {
     <img
     className="w-80  p-3 mt-10"
       src="https://static.vecteezy.com/system/resources/previews/041/646/741/non_2x/vip-membership-card-with-gold-elements-free-vector.jpg"
-      alt="Silver Membership" />
+      alt="Gold Membership" />
   </figure>
   <div className="card-body ">
     <h2 className="card-title mt-8">Gold MemberShip Benefits</h2>

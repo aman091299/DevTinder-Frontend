@@ -24,12 +24,13 @@ const Login = () => {
 useEffect(() => {
     const timer = setTimeout(() => {
       setShowToast(false);
-    }, 3000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [showtoast]);
 
   const SignUpHandler = async () => {
     setError('')
+     setLoading(true);
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
@@ -49,9 +50,12 @@ useEffect(() => {
       console.log(error);
       setError(error?.response?.data?.message);
       console.error("Error  " + error?.message);
+    }finally{
+      setLoading(false);
     }
   };
   async function loginHandler() {
+    setLoading(true);
     setError("");
     try {
       const res = await axios.post(
@@ -77,6 +81,8 @@ useEffect(() => {
     } catch (error) {
       setError(error?.response?.data?.message);
        console.error("Error  " + error.message);
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -109,6 +115,7 @@ useEffect(() => {
                 className="input focus:outline-none"
                 placeholder="LastName"
                 value={lastName}
+                required
                 onChange={(e) => {
                   setLastName(e.target.value);
                 }}
@@ -120,6 +127,7 @@ useEffect(() => {
             type="email"
             className="input focus:outline-none"
             placeholder="Email"
+                required
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -137,11 +145,11 @@ useEffect(() => {
             }}
           />
           {isLogin ? (
-            <button className="btn btn-neutral mt-4" onClick={loginHandler}>
+            <button disabled={loading} className="btn btn-neutral mt-4" onClick={loginHandler}>
               Login
             </button>
           ) : (
-            <button className="btn btn-neutral mt-4" onClick={SignUpHandler}>
+            <button disabled={loading} className="btn btn-neutral mt-4" onClick={SignUpHandler}>
               SignUp
             </button>
           )}
@@ -157,8 +165,8 @@ useEffect(() => {
             }}
           >
             {isLogin
-              ? "New User -> SignUp from Here"
-              : "Alreardy Have Account -> Login from Here"}
+              ? "New User ? SignUp from Here"
+              : "Alreardy Have Account ? Login from Here"}
           </div>
 
           {error && <div className="text-red-700 text-md mt-1">{error}</div>}

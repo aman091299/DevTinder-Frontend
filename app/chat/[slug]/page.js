@@ -2,15 +2,17 @@
 import { createSocketConnection } from "@/app/utils/store/socket";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef, useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../utils/constant";
 
 const Chat = () => {
   const [message, setMessage] = useState("");
-  const [newMessage, setNewMessage] = useState("");
-  const userSlice = useSelector((store) => store.user);
-  const [user,setUser]=useState(userSlice);
+  const [newMessage, setNewMessage] = useState([]);
+  const messageContainerRef=useRef(null)
+
+  const [user, setUser] = useState(null);
+
   const params = useParams();
   const targetUserId = params.slug;
 
@@ -18,14 +20,22 @@ const Chat = () => {
   const firstName = user?.firstName;
   const photoUrl = user?.photoUrl;
 
-  const formatDate = (timestamp) => {
+  useEffect(()=>{
+    const element=messageContainerRef.current;
+    if(element){
+      element.scrollTop=element.scrollHeight;
+    }
+    console.log("elemennt",element)
+  },[newMessage])
+
+  const formatDate = useCallback((timestamp) => {
     return new Date(timestamp).toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
     });
-  };
+  },[]);
 
-  const fetchGetChat = async () => {
+  const fetchGetChat = useCallback(async () => {
     try {
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
@@ -53,43 +63,53 @@ const Chat = () => {
     } catch (error) {
       console.log("Error in fetch chat data", error);
     }
-  };
+  },[targetUserId]);
 
   useEffect(() => {
     fetchGetChat();
-  }, []);
+  }, [targetUserId]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const userParse = localStorage.getItem("user");
       const user = JSON.parse(userParse);
       if (!user) {
+        return;
+      }
+
+      if (user) {
         setUser(user);
+        if (userId && targetUserId) {
+          const socket = createSocketConnection();
+          socket.emit("joinChat", { targetUserId, userId, firstName });
+          //it is recieving message continuously listning for message
+          socket.on(
+            "messageRecieved",
+            ({ text, firstName, photoUrl, userId }) => {
+              setNewMessage((prev) => [
+                ...prev,
+                {
+                  text,
+                  firstName,
+                  date: Date.now(),
+                  photoUrl,
+                  _id: Date.now().toString(),
+                  senderId: userId,
+                },
+              ]);
+            }
+          );
+
+          return () => {
+            socket.disconnect();
+          };
+        }
       }
     }
-    const socket = createSocketConnection();
+  }, [userId, targetUserId, firstName]);
 
-    socket.emit("joinChat", { targetUserId, userId, firstName });
-    //it is recieving message continuously listning for message
-    socket.on("messageRecieved", ({ text, firstName, photoUrl, userId }) => {
-      setNewMessage((prev) => [
-        ...prev,
-        {
-          text,
-          firstName,
-          date: Date.now(),
-          photoUrl,
-          _id: Date.now().toString(),
-          senderId: userId,
-        },
-      ]);
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, [userId, targetUserId]);
-
-  const sendMessage = (message) => {
+  const sendMessage = useCallback((message) => {
+    if(!message.trim()) return;
     if (message) {
       const socket = createSocketConnection();
       socket.emit("sendMessage", {
@@ -103,7 +123,7 @@ const Chat = () => {
     } else {
       return;
     }
-  };
+  });
 
   return (
     <div>
@@ -111,7 +131,8 @@ const Chat = () => {
         <div className="text-center font-bold  md:text-2xl py-2 md:py-3 border-b-1 ">
           Chatting
         </div>
-        <div className="overflow-y-scroll py-2 md:py-3 px-2 md:px-4">
+        <div ref={messageContainerRef} className="overflow-y-auto scroll-auto py-2 md:py-3 px-2 md:px-4">
+      
           {newMessage.length !== 0 &&
             newMessage?.map((msg) => (
               <div
@@ -141,6 +162,7 @@ const Chat = () => {
                 <div className="chat-footer opacity-50">Seen at 10:46</div>
               </div>
             ))}
+          
         </div>
         <div className="mt-auto border-t-1">
           <div className="flex items-center gap-6 m-4 ">

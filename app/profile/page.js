@@ -11,6 +11,7 @@ import Loader from "../components/Loader";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
+  const [isFormButtonDisable,setIsFormButtonDisable]=useState(false)
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -59,6 +60,7 @@ const Profile = () => {
   const submitHandler = async (e) => {
     try {
       setError("");
+      setIsFormButtonDisable(true);
       e.preventDefault();
       const validForm = Object.fromEntries(
         Object.entries(form).filter(([_, value]) => {
@@ -78,8 +80,11 @@ const Profile = () => {
       if (err.status === 401) {
          router.push("/login");
       }
+     
       console.error("Error", err);
-    }
+    } finally{
+        setIsFormButtonDisable(false)
+      }
   };
 
   if (loader) {
@@ -173,7 +178,7 @@ const Profile = () => {
               }}
             ></textarea>
             {error && <p className=" text-red-700">{error}</p>}
-            <button className="btn bg-black text-white mt-3">
+            <button disabled={isFormButtonDisable} className="btn bg-black text-white mt-3">
               Save Profile
             </button>
           </fieldset>

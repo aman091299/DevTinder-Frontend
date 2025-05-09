@@ -12,10 +12,11 @@ const Connections = () => {
    const router=useRouter();
 
   useEffect(()=>{
-  
+  console.log("inside use effect")
     if (typeof window !== "undefined") {
       const useStore = localStorage.getItem("user");
       const user = JSON.parse(useStore);
+      console.log('user',user)
        if(!user){
          router.push('/');
        }
@@ -28,6 +29,7 @@ const Connections = () => {
 
   const fetchConnections=async()=>{
     try {
+     
       setLoader(true);
       //connection request accepted
     const res=await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
@@ -65,7 +67,7 @@ const Connections = () => {
     Connections
     </div>
     <div>
-    <div className="mx-4 md:ml-11 flex flex-row justify-center md:justify-normal flex-wrap gap-4 md:gap-11 mb-5 ">
+    <div className="mx-4 md:ml-11 flex flex-row justify-center md:justify-normal flex-wrap gap-4 md:gap-7 mb-5 ">
     {
       validConnections?.map((conn)=>{
           return   ( <Card {...conn} key={conn?._id} connections={true} />) 

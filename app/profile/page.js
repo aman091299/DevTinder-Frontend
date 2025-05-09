@@ -10,6 +10,7 @@ import Loader from "../components/Loader";
 import UploadImage from "../components/UploadImage";
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const userSlice = useSelector((store) => store.user);
   const [loader, setLoader] = useState(true);
   const [isFormButtonDisable,setIsFormButtonDisable]=useState(false)
   const [form, setForm] = useState({
@@ -48,7 +49,7 @@ const Profile = () => {
       }
     }
     setLoader(false);
-  }, []);
+  }, [userSlice]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -59,7 +60,7 @@ const Profile = () => {
 
     const isFormChangehandler=()=>{ 
       return Object.keys(form).some((key)=>{
-           return form[key] !== user[key];
+           return form[key] != user[key];
       })}
   const submitHandler = async (e) => {
     try {

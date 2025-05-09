@@ -57,6 +57,10 @@ const Profile = () => {
     return () => clearTimeout(timer);
   }, [showtoast]);
 
+    const isFormChangehandler=()=>{ 
+      return Object.keys(form).some((key)=>{
+           return form[key] !== user[key];
+      })}
   const submitHandler = async (e) => {
     try {
       setError("");
@@ -67,7 +71,8 @@ const Profile = () => {
           return value !== "" && value != null && value?.length !== 0;
         })
       );
-
+   
+     
       const res = await axios.patch(BASE_URL + "/profile/edit", validForm, {
         withCredentials: true,
       });
@@ -178,8 +183,8 @@ const Profile = () => {
               }}
             ></textarea>
             {error && <p className=" text-red-700">{error}</p>}
-            <button disabled={isFormButtonDisable} className="btn bg-black text-white mt-3">
-              Save Profile
+            <button disabled={isFormButtonDisable || !isFormChangehandler()} className="btn bg-black text-white mt-3">
+               {isFormButtonDisable ? "Saving..." : "Save Profile"}
             </button>
           </fieldset>
         </form>

@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import {  removeFeedUser} from '../utils/store/userFeedSlice'
 import {useState,useRef} from 'react';
 import Link from 'next/link';
+import Loader from './Loader';
+import ButtonLoader from './ButtonLoader';
 
 const Card = ({id,removeConnections,connectionId,sender,_id
   ,firstName,lastName,age,gender,skills,about,photoUrl,connections}) => {
@@ -64,19 +66,34 @@ const dispatch=useDispatch();
   </div>
   {connectionId && sender &&
  <div className="flex gap-6 mb-3 px-2 ">
-  <button className="btn btn-primary  btn-outline flex-1" disabled={loading==='accepted'} onClick={()=>handleRequest('accepted',connectionId)}>{loading==='accepted'?'Proccessing...':'Accept'}</button>
-  <button className="btn btn-secondary btn-outline flex-1 " disabled={loading==='rejected'} onClick={()=>handleRequest('rejected',connectionId)}>{loading==='rejected'?'Processing...':'Reject'}</button>
+  <button className="btn btn-primary  btn-outline flex-1" disabled={loading==='accepted'} onClick={()=>handleRequest('accepted',connectionId)}>{loading==='accepted'?
+  
+   <div className="flex gap-1">
+    <span> Proccessing...</span>
+     <ButtonLoader/>
+   </div>
+  :'Accept'}</button>
+  <button className="btn btn-secondary btn-outline flex-1 " disabled={loading==='rejected'} onClick={()=>handleRequest('rejected',connectionId)}>{loading==='rejected'?  <div className="flex gap-1">
+    <span> Proccessing...</span>
+     <ButtonLoader/>
+   </div>:'Reject'}</button>
   </div>
   }
   {connectionId && !sender &&
-  <div className="bg-gray-200  text-gray-700 py-2 px-4 rounded-lg text-center mb-3 mx-2">
+  <button disabled className="bg-gray-500  text-gray-300 py-2 px-4 rounded-sm text-center mb-3 mx-2">
     Request Send
-  </div>
+  </button>
   }
   {id &&
     <div className="flex gap-6 mb-4 mx-2">
-  <button className="btn btn-primary flex-1 btn-outline" disabled={loading==='interested'} onClick={()=>handleRequestSend('interested',id)}>{loading==='interested'?'Sending...':"Interested"}</button>
-  <button className="btn btn-secondary flex-1 btn-outline " disabled={loading==='ignored'} onClick={()=>handleRequestSend('ignored',id)}>{loading==='ignored'?'Processing':'Ignored'}</button>
+  <button className="btn btn-primary flex-1 btn-outline" disabled={loading==='interested'} onClick={()=>handleRequestSend('interested',id)}>{loading==='interested'?  <div className="flex gap-1">
+    <span> Sending...</span>
+     <ButtonLoader/>
+   </div>:"Interested"}</button>
+  <button className="btn btn-secondary flex-1 btn-outline " disabled={loading==='ignored'} onClick={()=>handleRequestSend('ignored',id)}>{loading==='ignored'?  <div className="flex gap-1">
+    <span> Proccessing...</span>
+     <ButtonLoader/>
+   </div>:'Ignored'}</button>
   </div>
   }
 </div>

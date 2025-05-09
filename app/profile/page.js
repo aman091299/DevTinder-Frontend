@@ -7,7 +7,7 @@ import { addUser } from "../utils/store/userSlice";
 import Card from "../components/Card";
 import { useRouter } from "next/navigation";
 import Loader from "../components/Loader";
-
+import UploadImage from "../components/UploadImage";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
@@ -158,8 +158,9 @@ const Profile = () => {
                 <option value="others">Others</option>
               </select>
             </fieldset>
-
-            <label className="label">PhotoUrl</label>
+            <label className="label">Image Upload</label>
+            <UploadImage setForm={setForm}/>
+            {/* <label className="label">PhotoUrl</label>
             <input
               type="text"
               className="input focus:outline-none"
@@ -170,7 +171,8 @@ const Profile = () => {
                   photoUrl: e.target.value,
                 }));
               }}
-            />
+            /> */}
+            <label className="label">Bio</label>
             <textarea
               className="textarea  focus:outline-none"
               placeholder="Bio"
@@ -178,7 +180,7 @@ const Profile = () => {
               onChange={(e) => {
                 setForm((prev) => ({
                   ...prev,
-                  about: e.target.value,
+                  photoUrl: e.target.value,
                 }));
               }}
             ></textarea>

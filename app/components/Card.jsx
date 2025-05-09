@@ -9,6 +9,7 @@ import ButtonLoader from './ButtonLoader';
 
 const Card = ({id,removeConnections,connectionId,sender,_id
   ,firstName,lastName,age,gender,skills,about,photoUrl,connections}) => {
+    console.log("photoUrl",photoUrl)
 
     const [loading,setLoading]=useState('');
   
@@ -81,7 +82,7 @@ const dispatch=useDispatch();
   }
   {connectionId && !sender &&
   <button disabled className="bg-gray-500  text-gray-300 py-2 px-4 rounded-sm text-center mb-3 mx-2">
-    Request Send
+    Request had Sended
   </button>
   }
   {id &&

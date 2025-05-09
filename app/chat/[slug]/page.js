@@ -25,7 +25,7 @@ const Chat = () => {
     if(element){
       element.scrollTop=element.scrollHeight;
     }
-    console.log("elemennt",element)
+   
   },[newMessage])
 
   const formatDate = useCallback((timestamp) => {

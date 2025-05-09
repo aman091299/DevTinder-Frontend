@@ -47,7 +47,7 @@ useEffect(() => {
         setShowToast(true);
       }
     } catch (error) {
-      console.log(error);
+    
       setError(error?.response?.data?.message);
       console.error("Error  " + error?.message);
     }
